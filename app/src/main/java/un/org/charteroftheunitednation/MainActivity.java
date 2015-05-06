@@ -1,17 +1,54 @@
 package un.org.charteroftheunitednation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import org.json.JSONException;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
+
+	private static final String TAG = "MainActivity";
+
+	private ListView list;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		list = (ListView) findViewById(android.R.id.list);
+
+		ArrayList<String> jsonArray = new ArrayList<>();
+		try {
+			jsonArray.add(MyApplication.sChapters.getJSONObject(0).getString("chatperName"));
+			jsonArray.add(MyApplication.sChapters.getJSONObject(1).getString("chatperName"));
+			jsonArray.add(MyApplication.sChapters.getJSONObject(2).getString("chatperName"));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+		ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout
+				.simple_list_item_1, jsonArray);
+		list.setAdapter(adapter);
+		list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Intent i = new Intent(MainActivity.this, DetailActivity.class);
+				i.putExtra("position", position);
+				startActivity(i);
+			}
+		});
+
 	}
 
 	@Override
