@@ -1,7 +1,6 @@
 package un.org.charteroftheunitednation;
 
 import android.app.Application;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -30,9 +29,6 @@ public class MyApplication extends Application {
 
 			JSONObject obj = (JSONObject) new JSONTokener(jsonString.toString()).nextValue();
 			sChapters = obj.getJSONArray("chapters");
-
-			for (int i = 0; i < sChapters.length(); ++i)
-				Log.d(TAG, sChapters.get(0).toString());
 
 			reader.close();
 		} catch (Exception e) {

@@ -2,7 +2,8 @@
   "chapters": [
     {
       "chapterId": "",
-      "chatperName": "介绍性说明",
+      "chapterTitle": "",
+      "chapterName": "介绍性说明",
       "chapterContents": [
         {
           "title": "",
@@ -38,7 +39,8 @@
     },
     {
       "chapterId": "",
-      "chatperName": "序言",
+      "chapterTitle": "",
+      "chapterName": "序言",
       "chapterContents": [
         {
           "title": "",
@@ -99,8 +101,9 @@
       ]
     },
     {
-      "chapterId": "第一章",
-      "chatperName": "宗旨及原则",
+      "chapterId": "一",
+      "chapterTitle": "第一章",
+      "chapterName": "宗旨及原则",
       "chapterContents": [
         {
           "title": "",
@@ -172,8 +175,9 @@
       ]
     },
     {
-      "chapterId": "第二章",
-      "chatperName": "会员",
+      "chapterId": "二",
+      "chapterTitle": "第二章",
+      "chapterName": "会员",
       "chapterContents": [
         {
           "title": "",
@@ -223,8 +227,9 @@
       ]
     },
     {
-      "chapterId": "第三章",
-      "chatperName": "机关",
+      "chapterId": "一",
+      "chapterTitle": "第三章",
+      "chapterName": "机关",
       "chapterContents": [
         {
           "title": "",
@@ -256,8 +261,9 @@
       ]
     },
     {
-      "chapterId": "第四章",
-      "chatperName": "大会",
+      "chapterId": "一",
+      "chapterTitle": "第四章",
+      "chapterName": "大会",
       "chapterContents": [
         {
           "title": "组织",
@@ -455,8 +461,9 @@
       ]
     },
     {
-      "chapterId": "第五章",
-      "chatperName": "安全理事会",
+      "chapterId": "一",
+      "chapterTitle": "第五章",
+      "chapterName": "安全理事会",
       "chapterContents": [
         {
           "title": "组织",
@@ -603,8 +610,9 @@
       ]
     },
     {
-      "chapterId": "第六章",
-      "chatperName": "争端之和平解决",
+      "chapterId": "一",
+      "chapterTitle": "第六章",
+      "chapterName": "争端之和平解决",
       "chapterContents": [
         {
           "title": "",
@@ -680,8 +688,9 @@
       ]
     },
     {
-      "chapterId": "第七章",
-      "chatperName": "对于和平之威胁、和平之破坏及侵略行为之应付办法",
+      "chapterId": "一",
+      "chapterTitle": "第七章",
+      "chapterName": "对于和平之威胁、和平之破坏及侵略行为之应付办法",
       "chapterContents": [
         {
           "title": "",
@@ -832,8 +841,9 @@
       ]
     },
     {
-      "chapterId": "第八章",
-      "chatperName": "区域办法",
+      "chapterId": "一",
+      "chapterTitle": "第八章",
+      "chapterName": "区域办法",
       "chapterContents": [
         {
           "title": "",
@@ -886,8 +896,9 @@
       ]
     },
     {
-      "chapterId": "第九章",
-      "chatperName": "国际经济及社会",
+      "chapterId": "一",
+      "chapterTitle": "第九章",
+      "chapterName": "国际经济及社会",
       "chapterContents": [
         {
           "title": "",
@@ -959,8 +970,9 @@
       ]
     },
     {
-      "chapterId": "第十章",
-      "chatperName": "经济及社会理事会",
+      "chapterId": "一",
+      "chapterTitle": "第十章",
+      "chapterName": "经济及社会理事会",
       "chapterContents": [
         {
           "title": "组织",
@@ -1141,8 +1153,9 @@
       ]
     },
     {
-      "chapterId": "第十一章",
-      "chatperName": "关于非自治领土之宣言",
+      "chapterId": "一",
+      "chapterTitle": "第十一章",
+      "chapterName": "关于非自治领土之宣言",
       "chapterContents": [
         {
           "title": "",
@@ -1176,8 +1189,9 @@
       ]
     },
     {
-      "chapterId": "第十二章",
-      "chatperName": "国际托管制度",
+      "chapterId": "一",
+      "chapterTitle": "第十二章",
+      "chapterName": "国际托管制度",
       "chapterContents": [
         {
           "title": "",
@@ -1315,8 +1329,9 @@
       ]
     },
     {
-      "chapterId": "第十三章",
-      "chatperName": "托管理事会",
+      "chapterId": "一",
+      "chapterTitle": "第十三章",
+      "chapterName": "托管理事会",
       "chapterContents": [
         {
           "title": "组织",
@@ -1329,7 +1344,8 @@
                   "bullets": [
                     "(子) 管理托管领土之会员国。",
                     "(丑) 第二十三条所列名之国家而现非管理托管领土者。",
-                    "(寅) 大会选举必要数额之其他会员国，任期三年，俾使托管理事会理事国之总数，于联合国会员国中之管理托管领土者及不管理者之间，得以平均分配。"]
+                    "(寅) 大会选举必要数额之其他会员国，任期三年，俾使托管理事会理事国之总数，于联合国会员国中之管理托管领土者及不管理者之间，得以平均分配。"
+                  ]
                 },
                 {
                   "paragraphBody": "二、托管理事会之每一理事国应指定一特别合格之人员，以代表之。",
@@ -1351,10 +1367,12 @@
                     "(子) 审查管理当局所送之报告。",
                     "(丑) 会同管理当局接受并审查请愿书。",
                     "(寅) 与管理当局商定时间，按期视察各托管领土。",
-                    "(卯) 依托管协定之条款，采取上述其他行动。"]
+                    "(卯) 依托管协定之条款，采取上述其他行动。"
+                  ]
                 }
               ]
-            },{
+            },
+            {
               "rulesId": "第八十八条",
               "paragraphs": [
                 {
@@ -1413,8 +1431,9 @@
       ]
     },
     {
-      "chapterId": "第十四章",
-      "chatperName": "国际法院",
+      "chapterId": "一",
+      "chapterTitle": "第十四章",
+      "chapterName": "国际法院",
       "chapterContents": [
         {
           "title": "",
@@ -1481,8 +1500,9 @@
       ]
     },
     {
-      "chapterId": "第十五章",
-      "chatperName": "秘书处",
+      "chapterId": "一",
+      "chapterTitle": "第十五章",
+      "chapterName": "秘书处",
       "chapterContents": [
         {
           "title": "",
@@ -1549,8 +1569,9 @@
       ]
     },
     {
-      "chapterId": "第十六章",
-      "chatperName": "杂项条款",
+      "chapterId": "一",
+      "chapterTitle": "第十六章",
+      "chapterName": "杂项条款",
       "chapterContents": [
         {
           "title": "",
@@ -1608,8 +1629,9 @@
       ]
     },
     {
-      "chapterId": "第十七章",
-      "chatperName": "过渡安全办法",
+      "chapterId": "一",
+      "chapterTitle": "第十七章",
+      "chapterName": "过渡安全办法",
       "chapterContents": [
         {
           "title": "",
@@ -1637,8 +1659,9 @@
       ]
     },
     {
-      "chapterId": "第十八章",
-      "chatperName": "修正",
+      "chapterId": "一",
+      "chapterTitle": "第十八章",
+      "chapterName": "修正",
       "chapterContents": [
         {
           "title": "",
@@ -1674,8 +1697,9 @@
       ]
     },
     {
-      "chapterId": "第十九章",
-      "chatperName": "批准及签字",
+      "chapterId": "一",
+      "chapterTitle": "第十九章",
+      "chapterName": "批准及签字",
       "chapterContents": [
         {
           "title": "",

@@ -1,21 +1,7 @@
 <resources>
     <string name="app_name">Charter of the United Nations</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_detail">DetailActivity</string>
 
-    <string-array name="chapters">
-        <item>介绍性说明</item>
-        <item>序言</item>
-        <item>第一章：宗旨及原则</item>
-        <item>第二章：会员</item>
-        <item>第三章：机关</item>
-        <item>第四章：大会</item>
-        <item>第五章：安全理事会</item>
-        <item>第六章：争端之和平解决</item>
-        <item>第七章：对于和平之威胁、和平之破坏及侵略行为之应付办法</item>
-        <item>第八章：区域办法</item>
-        <item>第九章：国际经济及社会</item>
-    </string-array>
 </resources>
