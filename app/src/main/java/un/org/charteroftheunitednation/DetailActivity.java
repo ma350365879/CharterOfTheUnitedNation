@@ -16,10 +16,10 @@ import org.json.JSONObject;
 
 
 public class DetailActivity extends AppCompatActivity {
-	private static final String TAG = "DetailActivity";
-	private static final ViewGroup.LayoutParams LAYOUT_PARAMS = new ViewGroup.LayoutParams(
+	public static final ViewGroup.LayoutParams LAYOUT_PARAMS = new ViewGroup.LayoutParams(
 			ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
+	private static final String TAG = "DetailActivity";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

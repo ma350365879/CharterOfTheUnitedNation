@@ -17,58 +17,63 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
+	private static final String TAG = "MainActivity";
 
-    private ListView list;
+	private ListView list;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
 
-        list = (ListView) findViewById(android.R.id.list);
+		list = (ListView) findViewById(android.R.id.list);
+//		ImageView header = new ImageView(this);
+//		header.setImageResource(R.drawable.un_header);
+//		header.setLayoutParams(DetailActivity.LAYOUT_PARAMS);
+		View header = getLayoutInflater().inflate(R.layout.list_header, null);
+		list.addHeaderView(header);
 
-        ArrayList<String> jsonArray = new ArrayList<>();
-        try {
-            for (int i = 0; i < MyApplication.sChapters.length(); ++i)
-                jsonArray.add(MyApplication.sChapters.getJSONObject(i).getString("chapterName"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+		ArrayList<String> jsonArray = new ArrayList<>();
+		try {
+			for (int i = 0; i < MyApplication.sChapters.length(); ++i)
+				jsonArray.add(MyApplication.sChapters.getJSONObject(i).getString("chapterName"));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout
-                .simple_list_item_1, jsonArray);
-        list.setAdapter(adapter);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(MainActivity.this, DetailActivity.class);
-                i.putExtra("position", position);
-                startActivity(i);
-            }
-        });
+		ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout
+				.simple_list_item_1, jsonArray);
+		list.setAdapter(adapter);
+		list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Intent i = new Intent(MainActivity.this, DetailActivity.class);
+				i.putExtra("position", position);
+				startActivity(i);
+			}
+		});
 
-    }
+	}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.menu_main, menu);
+		return true;
+	}
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+		//noinspection SimplifiableIfStatement
+		if (id == R.id.action_settings) {
+			return true;
+		}
 
-        return super.onOptionsItemSelected(item);
-    }
+		return super.onOptionsItemSelected(item);
+	}
 }
