@@ -1,5 +1,10 @@
 package un.org.charteroftheunitednation;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -7,8 +12,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,14 +25,18 @@ import org.json.JSONObject;
 public class DetailActivity extends AppCompatActivity {
 	public static final ViewGroup.LayoutParams LAYOUT_PARAMS = new ViewGroup.LayoutParams(
 			ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+	private static final ViewGroup.LayoutParams LINE_PARAMS = new ViewGroup.LayoutParams(
+			ViewGroup.LayoutParams.MATCH_PARENT, 1);
+	private int position;
 
 	private static final String TAG = "DetailActivity";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detail);
 
-		int position = getIntent().getIntExtra("position", -1);
+		position = getIntent().getIntExtra("position", -1);
 		if (position == -1)
 			return;
 
@@ -50,11 +61,18 @@ public class DetailActivity extends AppCompatActivity {
 		contentLayout.setOrientation(LinearLayout.VERTICAL);
 		contentLayout.setLayoutParams(LAYOUT_PARAMS);
 
-		TextView titleTextView = new TextView(this);
-		titleTextView.setText(chapterContent.getString("title"));
-		titleTextView.setGravity(Gravity.CENTER);
-		titleTextView.setLayoutParams(LAYOUT_PARAMS);
+		if (!chapterContent.getString("title").equals("")) {
+			TextView titleTextView = new TextView(this);
+			titleTextView.setPadding(0, 30, 0, 0);
+			titleTextView.setText(chapterContent.getString("title"));
+			titleTextView.setGravity(Gravity.CENTER);
+			titleTextView.setLayoutParams(LAYOUT_PARAMS);
+			titleTextView.setTextSize(22f);
+			titleTextView.setTypeface(null, Typeface.BOLD);
+			titleTextView.setTextColor(0xffa9abac);
 
+			contentLayout.addView(titleTextView);
+		}
 		LinearLayout bodyLayout = new LinearLayout(this);
 		bodyLayout.setOrientation(LinearLayout.VERTICAL);
 		bodyLayout.setLayoutParams(LAYOUT_PARAMS);
@@ -62,7 +80,6 @@ public class DetailActivity extends AppCompatActivity {
 		for (int i = 0; i < body.length(); ++i)
 			bodyLayout.addView(createRule(body.getJSONObject(i)));
 
-		contentLayout.addView(titleTextView);
 		contentLayout.addView(bodyLayout);
 		return contentLayout;
 	}
@@ -72,9 +89,29 @@ public class DetailActivity extends AppCompatActivity {
 		ruleLayout.setOrientation(LinearLayout.VERTICAL);
 		ruleLayout.setLayoutParams(LAYOUT_PARAMS);
 
-		TextView ruleNameTextView = new TextView(this);
-		ruleNameTextView.setText(body.getString("rulesId"));
+		if (!body.getString("rulesId").equals("")) {
+			TextView ruleNameTextView = new TextView(this);
+			ruleNameTextView.setText(body.getString("rulesId"));
+			ruleNameTextView.setPadding(0, 20, 0, 0);
+			ruleNameTextView.setTextSize(18f);
+			ruleNameTextView.setTypeface(null, Typeface.BOLD);
+			ruleNameTextView.setTextColor(0xffa9abac);
 
+//			LinearLayout blackLine = new LinearLayout(this);
+//			ruleLayout.setLayoutParams(LAYOUT_PARAMS);
+//			ruleLayout.getLayoutParams().height = 1;
+//			ruleLayout.getLayoutParams().width = 1;
+//			ruleLayout.setBackgroundColor(0xff1d1e20);
+//
+//			ImageView whiteLine = new ImageView(this);
+//			ruleLayout.setLayoutParams(LINE_PARAMS);
+//			ruleLayout.setBackgroundColor(0xff505155);
+
+			ruleLayout.addView(ruleNameTextView);
+
+//			ruleLayout.addView(blackLine);
+//			ruleLayout.addView(whiteLine);
+		}
 		LinearLayout paragraphsLayout = new LinearLayout(this);
 		paragraphsLayout.setOrientation(LinearLayout.VERTICAL);
 		paragraphsLayout.setLayoutParams(LAYOUT_PARAMS);
@@ -83,7 +120,6 @@ public class DetailActivity extends AppCompatActivity {
 			paragraphsLayout.addView(createParagraph(paragraphs.getJSONObject(i)));
 
 
-		ruleLayout.addView(ruleNameTextView);
 		ruleLayout.addView(paragraphsLayout);
 		return ruleLayout;
 	}
@@ -93,10 +129,18 @@ public class DetailActivity extends AppCompatActivity {
 		paragraphLayout.setOrientation(LinearLayout.VERTICAL);
 		paragraphLayout.setLayoutParams(LAYOUT_PARAMS);
 
-		TextView paragraphBodyTextView = new TextView(this);
-		paragraphBodyTextView.setText(paragraph.getString("paragraphBody"));
-		paragraphBodyTextView.setLayoutParams(LAYOUT_PARAMS);
+		if (!paragraph.getString("paragraphBody").equals("")) {
+			TextView paragraphBodyTextView = new TextView(this);
+			paragraphBodyTextView.setText(paragraph.getString("paragraphBody"));
+			paragraphBodyTextView.setLayoutParams(LAYOUT_PARAMS);
 
+			paragraphBodyTextView.setPadding(12, 3, 12, 3);
+			paragraphBodyTextView.setTextSize(18f);
+			paragraphBodyTextView.setTextColor(0xffa9abac);
+
+			paragraphLayout.addView(paragraphBodyTextView);
+
+		}
 		LinearLayout bulletsLayout = new LinearLayout(this);
 		bulletsLayout.setOrientation(LinearLayout.VERTICAL);
 		bulletsLayout.setLayoutParams(LAYOUT_PARAMS);
@@ -104,7 +148,6 @@ public class DetailActivity extends AppCompatActivity {
 		for (int i = 0; i < bullets.length(); i++)
 			bulletsLayout.addView(createBullet(bullets.getString(i)));
 
-		paragraphLayout.addView(paragraphBodyTextView);
 		paragraphLayout.addView(bulletsLayout);
 		return paragraphLayout;
 	}
@@ -114,7 +157,28 @@ public class DetailActivity extends AppCompatActivity {
 		bulletTextView.setText(bullet);
 		bulletTextView.setLayoutParams(LAYOUT_PARAMS);
 
+		bulletTextView.setPadding(16, 0, 16, 0);
+		bulletTextView.setTextSize(18f);
+		bulletTextView.setTextColor(0xffa9abac);
+
 		return bulletTextView;
+	}
+
+	public void goToPreviousChapter(View view) {
+		if (position != 0) {
+			Intent i = new Intent(DetailActivity.this, DetailActivity.class);
+			i.putExtra("position", position - 1);
+			startActivity(i);
+		}
+
+	}
+
+	public void goToNextChapter(View view) {
+		if (position != 20) {
+			Intent i = new Intent(DetailActivity.this, DetailActivity.class);
+			i.putExtra("position", position + 1);
+			startActivity(i);
+		}
 	}
 
 	@Override

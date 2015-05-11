@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name">Charter of the United Nations</string>
+    <string name="app_name">联合国宪章</string>
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_detail">DetailActivity</string>
+    <string name="previous_chapter"><![CDATA[<]]></string>
+    <string name="next_chapter"><![CDATA[>]]></string>
 
 </resources>
