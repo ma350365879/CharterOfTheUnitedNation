@@ -1,10 +1,6 @@
 package un.org.charteroftheunitednation;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -12,10 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,9 +21,8 @@ public class DetailActivity extends AppCompatActivity {
 			ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 	private static final ViewGroup.LayoutParams LINE_PARAMS = new ViewGroup.LayoutParams(
 			ViewGroup.LayoutParams.MATCH_PARENT, 1);
-	private int position;
-
 	private static final String TAG = "DetailActivity";
+	private int position;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +33,27 @@ public class DetailActivity extends AppCompatActivity {
 		if (position == -1)
 			return;
 
+		updateUI();
+	}
+
+	private void updateUI() {
+		View prevButton = findViewById(R.id.prevButton);
+		View nextButton = findViewById(R.id.nextButton);
+		if (position == 0) {
+			prevButton.setAlpha(.6f);
+			prevButton.setEnabled(false);
+		} else if (position == MyApplication.sChapters.length() - 1) {
+			nextButton.setAlpha(.6f);
+			nextButton.setEnabled(false);
+		} else {
+			prevButton.setEnabled(true);
+			nextButton.setEnabled(true);
+			prevButton.setAlpha(1);
+			nextButton.setAlpha(1);
+		}
+
 		LinearLayout layout = (LinearLayout) findViewById(R.id.chapterDetail);
+		layout.removeAllViews();
 		try {
 			JSONObject chapter = MyApplication.sChapters.getJSONObject(position);
 
@@ -165,19 +178,16 @@ public class DetailActivity extends AppCompatActivity {
 	}
 
 	public void goToPreviousChapter(View view) {
-		if (position != 0) {
-			Intent i = new Intent(DetailActivity.this, DetailActivity.class);
-			i.putExtra("position", position - 1);
-			startActivity(i);
+		if (position > 0) {
+			--position;
+			updateUI();
 		}
-
 	}
 
 	public void goToNextChapter(View view) {
-		if (position != 20) {
-			Intent i = new Intent(DetailActivity.this, DetailActivity.class);
-			i.putExtra("position", position + 1);
-			startActivity(i);
+		if (position < MyApplication.sChapters.length() - 1) {
+			++position;
+			updateUI();
 		}
 	}
 

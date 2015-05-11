@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				if (position != 0) {
+
 					Intent i = new Intent(MainActivity.this, DetailActivity.class);
 					i.putExtra("position", position - 1);
 					startActivity(i);
@@ -92,7 +93,8 @@ public class MainActivity extends AppCompatActivity {
 	private class ChapterAdapter extends ArrayAdapter<ChapterInfo> {
 
 		public ChapterAdapter(List<ChapterInfo> chapterInfoList) {
-			super(MainActivity.this, android.R.layout.simple_list_item_1, chapterInfoList);
+			super(MainActivity.this, android.R.layout.simple_list_item_activated_1,
+					chapterInfoList);
 		}
 
 		@Override
