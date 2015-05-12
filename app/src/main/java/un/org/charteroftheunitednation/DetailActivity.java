@@ -191,6 +191,7 @@ public class DetailActivity extends AppCompatActivity {
 		}
 	}
 
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.menu_detail, menu);
@@ -199,6 +200,12 @@ public class DetailActivity extends AppCompatActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case android.R.id.home:
+				super.onBackPressed();
+				supportFinishAfterTransition();
+				return true;
+		}
 		return super.onOptionsItemSelected(item);
 	}
 }
