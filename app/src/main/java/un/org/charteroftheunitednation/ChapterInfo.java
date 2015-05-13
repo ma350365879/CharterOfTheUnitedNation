@@ -1,11 +1,16 @@
 package un.org.charteroftheunitednation;
 
 public class ChapterInfo {
-	public String chapterName = "";
 	public String chapterId = "";
+	public String chapterName = "";
 
-	public ChapterInfo(String[] chapterInfo){
-		chapterName = chapterInfo[0];
-		chapterId = chapterInfo[1];
+	public ChapterInfo(String id, String name) {
+		chapterId = id;
+		chapterName = name;
+	}
+
+	@Override
+	public String toString() {
+		return chapterId + " " + chapterName;
 	}
 }

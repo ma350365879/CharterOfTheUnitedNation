@@ -4,7 +4,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +14,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 public class DetailActivity extends AppCompatActivity {
 	public static final ViewGroup.LayoutParams LAYOUT_PARAMS = new ViewGroup.LayoutParams(
 			ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-	private static final ViewGroup.LayoutParams LINE_PARAMS = new ViewGroup.LayoutParams(
-			ViewGroup.LayoutParams.MATCH_PARENT, 1);
+
 	private static final String TAG = "DetailActivity";
 	private int position;
 
@@ -29,7 +26,7 @@ public class DetailActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detail);
 
-		position = getIntent().getIntExtra("position", -1);
+		position = getIntent().getIntExtra(MainActivity.EXTRA_POSITION, -1);
 		if (position == -1)
 			return;
 
@@ -42,7 +39,7 @@ public class DetailActivity extends AppCompatActivity {
 		if (position == 0) {
 			prevButton.setAlpha(.6f);
 			prevButton.setEnabled(false);
-		} else if (position == MyApplication.sChapters.length() - 1) {
+		} else if (position == MyApplication.getChaptersJSON().length() - 1) {
 			nextButton.setAlpha(.6f);
 			nextButton.setEnabled(false);
 		} else {
@@ -55,11 +52,11 @@ public class DetailActivity extends AppCompatActivity {
 		LinearLayout layout = (LinearLayout) findViewById(R.id.chapterDetail);
 		layout.removeAllViews();
 		try {
-			JSONObject chapter = MyApplication.sChapters.getJSONObject(position);
+			JSONObject chapter = MyApplication.getChaptersJSON().getJSONObject(position);
 
-			String chapterId = chapter.getString("chapterTitle");
+			String chapterNumber = chapter.getString("chapterTitle");
 			String chapterName = chapter.getString("chapterName");
-			getSupportActionBar().setTitle(chapterId + " " + chapterName);
+			getSupportActionBar().setTitle(chapterNumber + " " + chapterName);
 			JSONArray chapterCotents = chapter.getJSONArray("chapterContents");
 			for (int i = 0; i < chapterCotents.length(); ++i)
 				layout.addView(createChapterContent(chapterCotents.getJSONObject(i)));
@@ -110,20 +107,7 @@ public class DetailActivity extends AppCompatActivity {
 			ruleNameTextView.setTypeface(null, Typeface.BOLD);
 			ruleNameTextView.setTextColor(0xffa9abac);
 
-//			LinearLayout blackLine = new LinearLayout(this);
-//			ruleLayout.setLayoutParams(LAYOUT_PARAMS);
-//			ruleLayout.getLayoutParams().height = 1;
-//			ruleLayout.getLayoutParams().width = 1;
-//			ruleLayout.setBackgroundColor(0xff1d1e20);
-//
-//			ImageView whiteLine = new ImageView(this);
-//			ruleLayout.setLayoutParams(LINE_PARAMS);
-//			ruleLayout.setBackgroundColor(0xff505155);
-
 			ruleLayout.addView(ruleNameTextView);
-
-//			ruleLayout.addView(blackLine);
-//			ruleLayout.addView(whiteLine);
 		}
 		LinearLayout paragraphsLayout = new LinearLayout(this);
 		paragraphsLayout.setOrientation(LinearLayout.VERTICAL);
@@ -185,17 +169,10 @@ public class DetailActivity extends AppCompatActivity {
 	}
 
 	public void goToNextChapter(View view) {
-		if (position < MyApplication.sChapters.length() - 1) {
+		if (position < MyApplication.getChaptersJSON().length() - 1) {
 			++position;
 			updateUI();
 		}
-	}
-
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.menu_detail, menu);
-		return true;
 	}
 
 	@Override
