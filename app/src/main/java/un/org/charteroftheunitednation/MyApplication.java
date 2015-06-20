@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyApplication extends Application {
-	private static final String TAG = "MyApplicaiton";
+	private static final String TAG = MyApplication.class.getSimpleName();
 	private static JSONArray sChaptersJSON;
 	private static List<ChapterInfo> sChapters;
 

@@ -1,7 +1,39 @@
-<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:adjustViewBounds="true"
-           android:background="#ff21235d"
-           android:src="@drawable/un_header"/>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
 
+	<ImageView
+		android:id="@+id/un_header"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:adjustViewBounds="true"
+		android:background="#ff21235d"
+		android:src="@drawable/un_header_not_bright_model"/>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		android:weightSum="5">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1"
+			android:gravity="right"
+			android:orientation="horizontal"
+			android:weightSum="8">
+
+			<LinearLayout
+				android:id="@+id/changeBrightModel"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:onClick="changeBrightModel"
+				android:orientation="vertical"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</FrameLayout>
