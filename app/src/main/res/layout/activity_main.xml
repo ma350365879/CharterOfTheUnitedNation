@@ -1,19 +1,18 @@
 <FrameLayout
-    android:id="@+id/main"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".MainActivity">
+	android:id="@+id/main"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="#ffcececf"
+	tools:context=".MainActivity">
 
-    <ListView
-        android:id="@android:id/list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:listSelector="@drawable/list_color_selector"
-        android:divider="@null"
-        android:dividerHeight="0dp">
-
-    </ListView>
+	<ListView
+		android:id="@android:id/list"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:divider="@null"
+		android:dividerHeight="0dp"
+		android:listSelector="@drawable/list_color_selector"/>
 
 </FrameLayout>

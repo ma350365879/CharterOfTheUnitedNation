@@ -1,10 +1,10 @@
 package un.org.charteroftheunitednation;
 
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,23 +15,41 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 public class DetailActivity extends AppCompatActivity {
 	public static final ViewGroup.LayoutParams LAYOUT_PARAMS = new ViewGroup.LayoutParams(
 			ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-	private static final ViewGroup.LayoutParams LINE_PARAMS = new ViewGroup.LayoutParams(
-			ViewGroup.LayoutParams.MATCH_PARENT, 1);
-	private static final String TAG = "DetailActivity";
+
+	private static final String TAG = DetailActivity.class.getSimpleName();
+	SharedPreferences pref;
 	private int position;
+	private int backgroundColor;
+	private int textColor;
+	private boolean isBrightModel;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detail);
 
-		position = getIntent().getIntExtra("position", -1);
+		position = getIntent().getIntExtra(MainActivity.EXTRA_POSITION, -1);
 		if (position == -1)
 			return;
+
+		pref = getApplicationContext().getSharedPreferences(MainActivity.IS_BRIGHT_MODE,
+				MODE_PRIVATE);
+		isBrightModel = pref.getBoolean("isBrightModel", false); // getting isBringhtModel
+
+		if (isBrightModel) {
+			this.textColor = 0xff363636;       //dark grey
+			this.backgroundColor = 0xffcececf; // white
+		} else {
+			this.textColor = 0xffc4c4c4;       // white
+			this.backgroundColor = 0xff303030; // dark grey
+		}
+
+		LinearLayout detailActivityContainer = (LinearLayout)
+				findViewById(R.id.activity_detail_container);
+		detailActivityContainer.setBackgroundColor(backgroundColor);
 
 		updateUI();
 	}
@@ -42,7 +60,7 @@ public class DetailActivity extends AppCompatActivity {
 		if (position == 0) {
 			prevButton.setAlpha(.6f);
 			prevButton.setEnabled(false);
-		} else if (position == MyApplication.sChapters.length() - 1) {
+		} else if (position == MyApplication.getChaptersJSON().length() - 1) {
 			nextButton.setAlpha(.6f);
 			nextButton.setEnabled(false);
 		} else {
@@ -55,7 +73,7 @@ public class DetailActivity extends AppCompatActivity {
 		LinearLayout layout = (LinearLayout) findViewById(R.id.chapterDetail);
 		layout.removeAllViews();
 		try {
-			JSONObject chapter = MyApplication.sChapters.getJSONObject(position);
+			JSONObject chapter = MyApplication.getChaptersJSON().getJSONObject(position);
 
 			String chapterId = chapter.getString("chapterTitle");
 			String chapterName = chapter.getString("chapterName");
@@ -82,7 +100,7 @@ public class DetailActivity extends AppCompatActivity {
 			titleTextView.setLayoutParams(LAYOUT_PARAMS);
 			titleTextView.setTextSize(22f);
 			titleTextView.setTypeface(null, Typeface.BOLD);
-			titleTextView.setTextColor(0xffa9abac);
+			titleTextView.setTextColor(textColor);
 
 			contentLayout.addView(titleTextView);
 		}
@@ -105,10 +123,10 @@ public class DetailActivity extends AppCompatActivity {
 		if (!body.getString("rulesId").equals("")) {
 			TextView ruleNameTextView = new TextView(this);
 			ruleNameTextView.setText(body.getString("rulesId"));
-			ruleNameTextView.setPadding(0, 20, 0, 0);
-			ruleNameTextView.setTextSize(18f);
+			ruleNameTextView.setPadding(0, 15, 0, 5);
+			ruleNameTextView.setTextSize(20f);
 			ruleNameTextView.setTypeface(null, Typeface.BOLD);
-			ruleNameTextView.setTextColor(0xffa9abac);
+			ruleNameTextView.setTextColor(textColor);
 
 //			LinearLayout blackLine = new LinearLayout(this);
 //			ruleLayout.setLayoutParams(LAYOUT_PARAMS);
@@ -143,15 +161,17 @@ public class DetailActivity extends AppCompatActivity {
 		paragraphLayout.setLayoutParams(LAYOUT_PARAMS);
 
 		if (!paragraph.getString("paragraphBody").equals("")) {
-			TextView paragraphBodyTextView = new TextView(this);
-			paragraphBodyTextView.setText(paragraph.getString("paragraphBody"));
-			paragraphBodyTextView.setLayoutParams(LAYOUT_PARAMS);
+			JustifyTextView paragraphBodyJustifyTextView = new JustifyTextView(this, null);
+//			paragraphBodyJustifyTextView.setGravity(Gravity.RIGHT);
+//			paragraphBodyJustifyTextView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+			paragraphBodyJustifyTextView.setText(paragraph.getString("paragraphBody"));
+			paragraphBodyJustifyTextView.setLayoutParams(LAYOUT_PARAMS);
 
-			paragraphBodyTextView.setPadding(12, 3, 12, 3);
-			paragraphBodyTextView.setTextSize(18f);
-			paragraphBodyTextView.setTextColor(0xffa9abac);
+			paragraphBodyJustifyTextView.setPadding(12, 3, 12, 3);
+			paragraphBodyJustifyTextView.setTextSize(18f);
+			paragraphBodyJustifyTextView.setTextColor(textColor);
 
-			paragraphLayout.addView(paragraphBodyTextView);
+			paragraphLayout.addView(paragraphBodyJustifyTextView);
 
 		}
 		LinearLayout bulletsLayout = new LinearLayout(this);
@@ -166,15 +186,15 @@ public class DetailActivity extends AppCompatActivity {
 	}
 
 	private View createBullet(String bullet) {
-		TextView bulletTextView = new TextView(this);
-		bulletTextView.setText(bullet);
-		bulletTextView.setLayoutParams(LAYOUT_PARAMS);
+		JustifyTextView bulletJustifyTextView = new JustifyTextView(this, null);
+		bulletJustifyTextView.setText(bullet);
+		bulletJustifyTextView.setLayoutParams(LAYOUT_PARAMS);
 
-		bulletTextView.setPadding(16, 0, 16, 0);
-		bulletTextView.setTextSize(18f);
-		bulletTextView.setTextColor(0xffa9abac);
+		bulletJustifyTextView.setPadding(16, 0, 16, 0);
+		bulletJustifyTextView.setTextSize(18f);
+		bulletJustifyTextView.setTextColor(textColor);
 
-		return bulletTextView;
+		return bulletJustifyTextView;
 	}
 
 	public void goToPreviousChapter(View view) {
@@ -185,7 +205,7 @@ public class DetailActivity extends AppCompatActivity {
 	}
 
 	public void goToNextChapter(View view) {
-		if (position < MyApplication.sChapters.length() - 1) {
+		if (position < MyApplication.getChaptersJSON().length() - 1) {
 			++position;
 			updateUI();
 		}
