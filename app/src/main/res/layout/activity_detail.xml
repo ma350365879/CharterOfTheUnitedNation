@@ -6,7 +6,7 @@
               android:layout_height="match_parent"
               android:background="#ff3b3c40"
               android:orientation="vertical"
-              tools:context="un.org.charteroftheunitednation.DetailActivity">
+	tools:context="un.org.charteroftheunitednations.DetailActivity">
 
 	<ScrollView
 		android:layout_width="match_parent"

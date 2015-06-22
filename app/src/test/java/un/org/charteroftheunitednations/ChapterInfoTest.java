@@ -1,4 +1,4 @@
-package un.org.charteroftheunitednation;
+package un.org.charteroftheunitednations;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package un.org.charteroftheunitednation;
+package un.org.charteroftheunitednations;
 
 public class ChapterInfo {
 	public String chapterId;

@@ -1,4 +1,4 @@
-package un.org.charteroftheunitednation;
+package un.org.charteroftheunitednations;
 
 import android.content.Intent;
 import android.widget.ListView;
