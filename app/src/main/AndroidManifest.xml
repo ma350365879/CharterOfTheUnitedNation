@@ -1,15 +1,15 @@
 <manifest
-	package="un.org.charteroftheunitednations"
+	package="org.un.charteroftheunitednations"
 	xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<application
-		android:name=".MyApplication"
+		android:name="org.un.charteroftheunitednations.MyApplication"
 		android:allowBackup="true"
 		android:icon="@mipmap/ic_launcher"
 		android:label="@string/app_name"
 		android:theme="@style/AppTheme">
 		<activity
-			android:name=".MainActivity"
+			android:name="org.un.charteroftheunitednations.MainActivity"
 			android:label="@string/app_name"
 			android:screenOrientation="portrait"
 			android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -20,13 +20,13 @@
 			</intent-filter>
 		</activity>
 		<activity
-			android:name=".DetailActivity"
+			android:name="org.un.charteroftheunitednations.DetailActivity"
 			android:label="@string/title_activity_detail"
-			android:parentActivityName=".MainActivity"
+			android:parentActivityName="org.un.charteroftheunitednations.MainActivity"
 			android:screenOrientation="portrait">
 			<meta-data
 				android:name="android.support.PARENT_ACTIVITY"
-				android:value="un.org.charteroftheunitednations.MainActivity"/>
+				android:value="org.un.charteroftheunitednations.MainActivity"/>
 		</activity>
 	</application>
 

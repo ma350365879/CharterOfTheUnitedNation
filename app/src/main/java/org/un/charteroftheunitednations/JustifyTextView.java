@@ -1,4 +1,4 @@
-package un.org.charteroftheunitednations;
+package org.un.charteroftheunitednations;
 
 import android.content.Context;
 import android.graphics.Canvas;

@@ -1,5 +1,4 @@
-package un.org.charteroftheunitednations;
-
+package org.un.charteroftheunitednations;
 
 import android.content.Intent;
 import android.widget.LinearLayout;
@@ -12,7 +11,6 @@ import org.robolectric.annotation.Config;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 19)

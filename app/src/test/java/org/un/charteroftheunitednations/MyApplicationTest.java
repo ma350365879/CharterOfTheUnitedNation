@@ -1,4 +1,4 @@
-package un.org.charteroftheunitednations;
+package org.un.charteroftheunitednations;
 
 import org.json.JSONArray;
 import org.junit.Before;

@@ -1,4 +1,4 @@
-package un.org.charteroftheunitednations;
+package org.un.charteroftheunitednations;
 
 import android.content.Intent;
 import android.widget.ListView;
@@ -16,7 +16,6 @@ import org.robolectric.shadows.ShadowListView;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 19)

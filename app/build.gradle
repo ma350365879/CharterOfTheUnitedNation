@@ -4,7 +4,7 @@ android {
 	compileSdkVersion 22
 	buildToolsVersion "21.1.2"
 	defaultConfig {
-		applicationId 'un.org.charteroftheunitednations'
+		applicationId 'org.un.charteroftheunitednations'
 		minSdkVersion 11
 		targetSdkVersion 22
 		versionCode 1
