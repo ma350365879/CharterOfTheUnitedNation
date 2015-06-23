@@ -62,9 +62,8 @@ public class JustifyTextView extends TextView {
 	private void drawScaledText(Canvas canvas, int lineStart, String line, float lineWidth) {
 		float x = 0;
 		if (isFirstLineOfParagraph(lineStart, line)) {
-			String blanks = "  ";
-			canvas.drawText(blanks, x, mLineY, getPaint());
-			float bw = StaticLayout.getDesiredWidth(blanks, getPaint());
+			canvas.drawText(TWO_CHINESE_BLANK, x, mLineY, getPaint());
+			float bw = StaticLayout.getDesiredWidth(TWO_CHINESE_BLANK, getPaint());
 			x += bw;
 
 			line = line.substring(3);
@@ -94,11 +93,7 @@ public class JustifyTextView extends TextView {
 	}
 
 	private boolean needScale(String line) {
-		if (line == null || line.length() == 0) {
-			return false;
-		} else {
-			return line.charAt(line.length() - 1) != '\n';
-		}
+		return !(line == null || line.length() == 0) || line.charAt(line.length() - 1) != '\n';
 	}
 
 }

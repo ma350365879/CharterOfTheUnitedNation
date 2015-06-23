@@ -2,8 +2,10 @@ package un.org.charteroftheunitednations;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -18,12 +20,11 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 	public static final String IS_BRIGHT_MODE = "KEY_FOR_IS_BRIGHT_MODE";
+	public static final String PREF_KEY = MainActivity.class.getPackage().toString();
 	public static final String EXTRA_POSITION = "position";
 
 	private static final String TAG = MainActivity.class.getSimpleName();
 	boolean isBrightModel;
-	SharedPreferences pref;
-	SharedPreferences.Editor editor;
 	private ListView list;
 
 	@Override
@@ -38,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
 		final List<ChapterInfo> chapterInfos = MyApplication.getChapters();
 
-		pref = getApplicationContext().getSharedPreferences(IS_BRIGHT_MODE, MODE_PRIVATE);
-		editor = pref.edit();
-		isBrightModel = pref.getBoolean("isBrightModel", false); // getting isBringhtModel
+		final SharedPreferences pref = getSharedPreferences(PREF_KEY, MODE_PRIVATE);
+		Log.d(TAG, "PREF_KEY: " + PREF_KEY);
+		isBrightModel = pref.getBoolean(IS_BRIGHT_MODE, false); // getting isBringhtModel
 
 		initialList(chapterInfos, isBrightModel);
 		setHeaderPic(isBrightModel);
@@ -48,8 +49,7 @@ public class MainActivity extends AppCompatActivity {
 		list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				if (position == 0) {
-				} else if (position != 0) {
+				if (position > 0) {
 					Intent i = new Intent(MainActivity.this, DetailActivity.class);
 					i.putExtra(EXTRA_POSITION, position - 1);
 					startActivity(i);
@@ -61,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View v) {
 				isBrightModel = !isBrightModel;
-				editor.putBoolean("isBrightModel", isBrightModel).commit(); //Storing isBrightModel
+				pref.edit().putBoolean(IS_BRIGHT_MODE, isBrightModel).apply(); //Storing
+				// isBrightModel
 				setHeaderPic(isBrightModel);
 				initialList(chapterInfos, isBrightModel);
 			}
@@ -70,11 +71,10 @@ public class MainActivity extends AppCompatActivity {
 
 	private void setHeaderPic(boolean isBrightModel) {
 		ImageView un_header = (ImageView) findViewById(R.id.un_header);
-		if (isBrightModel) {
+		if (isBrightModel)
 			un_header.setImageResource(R.drawable.un_header_bright_model);
-		} else {
+		else
 			un_header.setImageResource(R.drawable.un_header_not_bright_model);
-		}
 	}
 
 	private void initialList(List<ChapterInfo> chapterInfos, boolean isBrightModel) {
@@ -84,24 +84,26 @@ public class MainActivity extends AppCompatActivity {
 
 	private class ChapterAdapter extends ArrayAdapter<ChapterInfo> {
 
-		int textColor;
-		int backgroundColor;
-		int lineUpColor;
-		int lineDownColor;
+		private int textColor;
+		private int backgroundColor;
+		private int lineUpColor;
+		private int lineDownColor;
 
 		public ChapterAdapter(List<ChapterInfo> chapterInfoList, boolean isBrightModel) {
 			super(MainActivity.this, android.R.layout.simple_list_item_activated_1,
 					chapterInfoList);
+
+			Resources res = getResources();
 			if (isBrightModel) {
-				this.textColor = 0xff363636;       //dark grey
-				this.backgroundColor = 0xffcececf; // white
-				this.lineUpColor = 0xff676869;     //grey
-				this.lineDownColor = 0x00000000;   //white <- transparent
+				textColor = res.getColor(R.color.text_color_mode_bright);
+				backgroundColor = res.getColor(R.color.background_color_mode_bright);
+				lineUpColor = res.getColor(R.color.line_up_color_mode_bright);
+				lineDownColor = res.getColor(R.color.line_down_color_mode_bright);
 			} else {
-				this.textColor = 0xffc4c4c4;       // white
-				this.backgroundColor = 0xff303030; // dark grey
-				this.lineUpColor = 0xff1d1e20;     // light grey
-				this.lineDownColor = 0xff55565a;   // dark dark grey
+				textColor = res.getColor(R.color.text_color_mode_dark);
+				backgroundColor = res.getColor(R.color.background_color_mode_dark);
+				lineUpColor = res.getColor(R.color.line_up_color_mode_dark);
+				lineDownColor = res.getColor(R.color.line_down_color_mode_dark);
 			}
 		}
 
@@ -124,9 +126,9 @@ public class MainActivity extends AppCompatActivity {
 			dateTextView.setText(c.chapterName);
 			dateTextView.setTextColor(textColor);
 
-			FrameLayout contentLayoout = (FrameLayout)
+			FrameLayout contentLayout = (FrameLayout)
 					findViewById(R.id.main);
-			contentLayoout.setBackgroundColor(backgroundColor);
+			contentLayout.setBackgroundColor(backgroundColor);
 			LinearLayout lineLayout = (LinearLayout)
 					convertView.findViewById(R.id.line_background);
 			lineLayout.setBackgroundColor(backgroundColor);

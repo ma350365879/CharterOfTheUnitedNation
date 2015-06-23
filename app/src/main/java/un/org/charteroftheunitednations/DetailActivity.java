@@ -1,11 +1,11 @@
 package un.org.charteroftheunitednations;
 
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -20,11 +20,8 @@ public class DetailActivity extends AppCompatActivity {
 			ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
 	private static final String TAG = DetailActivity.class.getSimpleName();
-	SharedPreferences pref;
 	private int position;
-	private int backgroundColor;
 	private int textColor;
-	private boolean isBrightModel;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,16 +32,17 @@ public class DetailActivity extends AppCompatActivity {
 		if (position == -1)
 			return;
 
-		pref = getApplicationContext().getSharedPreferences(MainActivity.IS_BRIGHT_MODE,
-				MODE_PRIVATE);
-		isBrightModel = pref.getBoolean("isBrightModel", false); // getting isBringhtModel
+		SharedPreferences pref = getSharedPreferences(MainActivity.PREF_KEY, MODE_PRIVATE);
+		boolean isBrightModel = pref.getBoolean(MainActivity.IS_BRIGHT_MODE, false);
 
+		Resources res = getResources();
+		int backgroundColor;
 		if (isBrightModel) {
-			this.textColor = 0xff363636;       //dark grey
-			this.backgroundColor = 0xffcececf; // white
+			textColor = res.getColor(R.color.text_color_mode_bright);
+			backgroundColor = res.getColor(R.color.background_color_mode_bright);
 		} else {
-			this.textColor = 0xffc4c4c4;       // white
-			this.backgroundColor = 0xff303030; // dark grey
+			textColor = res.getColor(R.color.text_color_mode_dark);
+			backgroundColor = res.getColor(R.color.background_color_mode_dark);
 		}
 
 		LinearLayout detailActivityContainer = (LinearLayout)
@@ -137,7 +135,6 @@ public class DetailActivity extends AppCompatActivity {
 		for (int i = 0; i < paragraphs.length(); ++i)
 			paragraphsLayout.addView(createParagraph(paragraphs.getJSONObject(i)));
 
-
 		ruleLayout.addView(paragraphsLayout);
 		return ruleLayout;
 	}
@@ -149,8 +146,6 @@ public class DetailActivity extends AppCompatActivity {
 
 		if (!paragraph.getString("paragraphBody").equals("")) {
 			JustifyTextView paragraphBodyJustifyTextView = new JustifyTextView(this, null);
-//			paragraphBodyJustifyTextView.setGravity(Gravity.RIGHT);
-//			paragraphBodyJustifyTextView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
 			paragraphBodyJustifyTextView.setText(paragraph.getString("paragraphBody"));
 			paragraphBodyJustifyTextView.setLayoutParams(LAYOUT_PARAMS);
 
@@ -159,7 +154,6 @@ public class DetailActivity extends AppCompatActivity {
 			paragraphBodyJustifyTextView.setTextColor(textColor);
 
 			paragraphLayout.addView(paragraphBodyJustifyTextView);
-
 		}
 		LinearLayout bulletsLayout = new LinearLayout(this);
 		bulletsLayout.setOrientation(LinearLayout.VERTICAL);
@@ -196,16 +190,5 @@ public class DetailActivity extends AppCompatActivity {
 			++position;
 			updateUI();
 		}
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case android.R.id.home:
-				super.onBackPressed();
-				supportFinishAfterTransition();
-				return true;
-		}
-		return super.onOptionsItemSelected(item);
 	}
 }
