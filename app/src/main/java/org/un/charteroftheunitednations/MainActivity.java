@@ -126,8 +126,7 @@ public class MainActivity extends AppCompatActivity {
 			dateTextView.setText(c.chapterName);
 			dateTextView.setTextColor(textColor);
 
-			FrameLayout contentLayout = (FrameLayout)
-					findViewById(R.id.main);
+			FrameLayout contentLayout = (FrameLayout) findViewById(R.id.main);
 			contentLayout.setBackgroundColor(backgroundColor);
 			LinearLayout lineLayout = (LinearLayout)
 					convertView.findViewById(R.id.line_background);

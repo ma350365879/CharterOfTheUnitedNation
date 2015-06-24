@@ -15,7 +15,6 @@ import static org.junit.Assert.assertTrue;
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 19)
 public class DetailActivityTest {
-
 	@Test
 	public void shouldDisplayNothingIfNoPostionPassedIn() {
 		DetailActivity activity = Robolectric.setupActivity(DetailActivity.class);

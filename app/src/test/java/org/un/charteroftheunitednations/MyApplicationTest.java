@@ -1,11 +1,9 @@
 package org.un.charteroftheunitednations;
 
 import org.json.JSONArray;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricGradleTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.List;
@@ -16,14 +14,6 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 19)
 public class MyApplicationTest {
-
-	private MyApplication application;
-
-	@Before
-	public void setUp() {
-		application = (MyApplication) RuntimeEnvironment.application;
-	}
-
 	@Test
 	public void testGetChapters() {
 		List<ChapterInfo> chapters = MyApplication.getChapters();

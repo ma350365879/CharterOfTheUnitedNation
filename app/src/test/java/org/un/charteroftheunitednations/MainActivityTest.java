@@ -1,6 +1,9 @@
 package org.un.charteroftheunitednations;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.view.View;
 import android.widget.ListView;
 
 import org.junit.Before;
@@ -16,6 +19,7 @@ import org.robolectric.shadows.ShadowListView;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 19)
@@ -50,12 +54,23 @@ public class MainActivityTest {
 	}
 
 	@Test
-
 	public void shouldLaunchDetailActivityWhenNonHeaderListItemIsClicked() {
 		shadowList.performItemClick(1);
 		Intent actualIntent = shadowActivity.getNextStartedActivity();
 		assertNotNull(actualIntent);
 		assertEquals(DetailActivity.class.getName(), actualIntent.getComponent().getClassName());
 		assertEquals(0, actualIntent.getIntExtra(MainActivity.EXTRA_POSITION, -1));
+	}
+
+	@Test
+	public void shouldChangeSettingIfButtonIsPressed() {
+		SharedPreferences prefs = shadowActivity.getSharedPreferences(MainActivity.PREF_KEY,
+				Activity.MODE_PRIVATE);
+		boolean isBright = prefs.getBoolean(MainActivity.IS_BRIGHT_MODE, false);
+		View changeThemeButton = shadowActivity.findViewById(R.id.changeBrightModel);
+		changeThemeButton.performClick();
+		assertTrue(isBright != prefs.getBoolean(MainActivity.IS_BRIGHT_MODE, false));
+		changeThemeButton.performClick();
+		assertTrue(isBright == prefs.getBoolean(MainActivity.IS_BRIGHT_MODE, false));
 	}
 }
